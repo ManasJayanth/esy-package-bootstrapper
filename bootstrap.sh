@@ -91,7 +91,7 @@ jobs:
       displayName: 'Installing deps'
   - script: esy install
     displayName: 'Installing deps'
-  - \${{ if ne(parameters.host, 'Windows') }}:
+  - \${{ if eq(parameters.host, 'Windows') }}:
     - script: esy b bash .ci/pkg-config-cygwin.sh
       displayName: 'Installing pkg-config in cygwin'
   - script: 'esy x which <COMMAND>'
