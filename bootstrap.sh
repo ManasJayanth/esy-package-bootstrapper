@@ -85,17 +85,17 @@ jobs:
       displayName: 'Install pkg-config (for testing)'
   - \${{ if eq(parameters.host, 'Windows') }}:
     - script: 'npm install -g esy@latest --unsafe-perm'
-      displayName: 'Installing deps'
+      displayName: 'Install esy'
   - \${{ if ne(parameters.host, 'Windows') }}:
     - script: 'sudo npm install -g esy@latest --unsafe-perm'
-      displayName: 'Installing deps'
+      displayName: 'Install esy'
   - script: esy install
-    displayName: 'Installing deps'
+    displayName: 'esy install'
   - \${{ if eq(parameters.host, 'Windows') }}:
     - script: esy b bash .ci/pkg-config-cygwin.sh
       displayName: 'Installing pkg-config in cygwin'
   - script: 'esy x which <COMMAND>'
-    displayName: 'Installing deps'
+    displayName: 'Checking binary...'
 EOF
 
     cat >.gitattributes<<EOF
