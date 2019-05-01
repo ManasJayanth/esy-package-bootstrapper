@@ -86,7 +86,7 @@ jobs:
   - \${{ if eq(parameters.host, 'Windows') }}:
     - script: 'npm install -g esy@latest --unsafe-perm'
       displayName: 'Installing deps'
-  - \${{ if ne(parameters.sign, 'Windows') }}:
+  - \${{ if ne(parameters.host, 'Windows') }}:
     - script: 'sudo npm install -g esy@latest --unsafe-perm'
       displayName: 'Installing deps'
   - script: esy install
