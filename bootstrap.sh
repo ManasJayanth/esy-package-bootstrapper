@@ -115,7 +115,7 @@ EOF
     "buildsInSource": true,
     "build": [
       ["chmod", "755", "./configure"],
-      ["bash", "-c", "#{os == 'windows' ? './configure --prefix=$cur__install --host x86_64-w64-mingw32' : './configure --prefix=$cur__install'}"],
+      ["bash", "-c", "#{os == 'windows' ? './configure --prefix=\$cur__install --host x86_64-w64-mingw32' : './configure --prefix=\$cur__install'}"],
       ["make"],
       ["make", "install"]
     ]
