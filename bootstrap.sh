@@ -94,8 +94,8 @@ jobs:
   - \${{ if eq(parameters.host, 'Windows') }}:
     - script: esy b bash .ci/pkg-config-cygwin.sh
       displayName: 'Installing pkg-config in cygwin'
-  - script: 'esy x which <COMMAND>'
-    displayName: 'Checking binary...'
+  - script: 'esy x pkg-config --libs <COMMAND>'
+    displayName: 'Checking library...'
 EOF
 
     cat >.gitattributes<<EOF
@@ -113,6 +113,12 @@ EOF
   "description": "$ESY_PKG packaged for esy",
   "esy": {
     "buildsInSource": true,
+    "exportedEnv": {
+      "PKG_CONFIG_PATH": {
+        "scope": "global",
+        "val": "#{self.lib / 'pkgconfig' : $PKG_CONFIG_PATH }"
+      }
+    },
     "build": [
       ["chmod", "755", "./configure"],
       ["bash", "-c", "#{os == 'windows' ? './configure --prefix=\$cur__install --host x86_64-w64-mingw32' : './configure --prefix=\$cur__install'}"],
